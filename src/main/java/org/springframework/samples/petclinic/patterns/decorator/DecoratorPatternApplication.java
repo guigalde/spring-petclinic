@@ -174,7 +174,7 @@ public class DecoratorPatternApplication {
                                          new EncryptionDecorator(
                                              new FileDataSource("out/OutputDemo.txt")));
         encoded.writeData(salaryRecords);
-        DataSource plain = new FileDataSource("out/OutputDemo.txt");
+        DataSource plain = new FileDataSource("src/test/resources/out/OutputDemo.txt");
 
         System.out.println("- Input ----------------");
         System.out.println(salaryRecords);
