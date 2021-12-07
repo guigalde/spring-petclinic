@@ -4,8 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Payment extends AuditableEntity{
 	double amount;

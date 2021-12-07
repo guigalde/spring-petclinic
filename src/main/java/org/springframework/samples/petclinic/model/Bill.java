@@ -8,8 +8,11 @@ import org.hibernate.envers.NotAudited;
 import org.hibernate.envers.RevisionEntity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Audited
 @Entity
 public class Bill extends BaseEntity{		
