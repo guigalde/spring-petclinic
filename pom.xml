@@ -32,6 +32,20 @@
 
     </properties>
 
+    <developers>
+       <developer>
+            <id>Cris</id> <name>Cristina</name> <email>cristinacabanillas@us.es</email> <url>https://www.cristinacabanillas.com</url> 
+            <roles>
+                <role>teacher</role>
+            </roles>
+            <properties>
+                <picUrl>
+                    https://pbs.twimg.com/media/Eh4n9GhUMAAdO8x?format=jpg&name =large
+                </picUrl>
+            </properties>
+       </developer>
+    </developers>
+    
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
         <dependency>
