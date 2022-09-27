@@ -52,5 +52,5 @@
         </c:forEach>
         </tbody>
     </table>
-
+    <a class="btn btn-default" href="/statistics/achievements/new">Create new achievement</a>
 </petclinic:layout>

@@ -37,6 +37,6 @@
                     </c:choose>
                 </div>
             </div>
-        </form:form>        
+        </form:form>                
     </jsp:body>
 </petclinic:layout>
