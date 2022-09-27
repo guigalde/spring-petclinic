@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.statistics;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,8 +53,10 @@ public class AchievementController {
  
     @Transactional
     @PostMapping("/{id}/edit")
-    public ModelAndView saveAchievement(@PathVariable int id,Achievement achievement){
-        
+    public ModelAndView saveAchievement(@PathVariable int id,@Valid Achievement achievement, BindingResult br){
+        if(br.hasErrors()){
+            return new ModelAndView(ACHIEVEMENTS_FORM,br.getModel());            
+        }
         Achievement achievementToBeUpdated=service.getById(id);
         BeanUtils.copyProperties(achievement,achievementToBeUpdated,"id");
         service.save(achievementToBeUpdated);
@@ -72,7 +76,10 @@ public class AchievementController {
 
     @Transactional
     @PostMapping("/new")
-    public ModelAndView saveNewAchievement(Achievement achievement, BindingResult br){
+    public ModelAndView saveNewAchievement(@Valid Achievement achievement, BindingResult br){
+        if(br.hasErrors()){
+            return new ModelAndView(ACHIEVEMENTS_FORM,br.getModel());            
+        }
         service.save(achievement);
         ModelAndView result=showAchievements();
         result.addObject("message", "The achievement was created successfully");
