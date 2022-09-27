@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="vets">
+<petclinic:layout pageName="achievements">
     <h2>Achievements</h2>
 
     <table id="achievementsTable" class="table table-striped">
@@ -23,12 +23,12 @@
                     <c:out value="${achievement.name}"/>
                 </td>
                 <td>                    
-                      <c:out value="${achievement.description} "/>                                        
+                      <c:out value="${achievement.actualDescription} "/>                                        
                 </td>
                 <td>                    
                     <c:if test="${achievement.badgeImage == ''}">none</c:if>
                     <c:if test="${achievement.badgeImage != ''}">
-                        <img src="resources/images/${achievement.badgeImage}"  /> 
+                        <img src="${achievement.badgeImage}" width="100px"  /> 
                     </c:if>
                 </td>
                 <td>       

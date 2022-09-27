@@ -14,4 +14,8 @@ public class Achievement extends NamedEntity {
     private String description;
     private String badgeImage;
     private double threshold;
+
+    public String getActualDescription(){
+        return description.replace("<THRESHOLD>",String.valueOf(threshold));
+    }
 }
