@@ -14,6 +14,8 @@
             <th>Description</th>
             <th>BadgeImage</th>
             <th>Threshold</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +37,16 @@
                     <c:out value="${achievement.threshold} "/>
                 </td>
             
+                <td> 
+                    <a href="/statistics/achievements/${achievement.id}/edit"> 
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>                            
+                    </a>       
+                </td>
+                <td> 
+                    <a href="/statistics/achievements/${achievement.id}/delete"> 
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </a>      
+                </td>
                 
             </tr>
         </c:forEach>
