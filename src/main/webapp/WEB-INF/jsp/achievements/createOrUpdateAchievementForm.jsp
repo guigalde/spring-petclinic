@@ -24,6 +24,15 @@
                 <petclinic:inputField label="Description" name="description"/>
                 <petclinic:inputField label="Badge" name="badgeImage"/>
                 <petclinic:inputField label="Threshold" name="threshold"/>
+                <petclinic:selectField label="Metric"  name="metric" names="${metrics}" size="3"/>
+                <!-- Metrics:  We provide also  the solution with spring form:select and classical HTML selects     -->
+                <!-- form:select path="metric" items="${metrics}"/-->
+                <!-- select  name="metric"-->
+                    <!-- c:forEach items="${metrics}" var="metric"-->
+                        <!--option value="${metric}"><c:out value="${metric}"/></option>
+                    <!--/c:forEach-->
+                <!-- /select-->
+
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
