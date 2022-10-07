@@ -1,5 +1,10 @@
 package org.springframework.samples.petclinic.statistics;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -47,20 +52,24 @@ public class AchievementController {
     public ModelAndView editAchievement(@PathVariable int id){
         Achievement achievement=service.getById(id);        
         ModelAndView result=new ModelAndView(ACHIEVEMENTS_FORM);
-        result.addObject("achievement", achievement);
+        result.addObject("achievement", achievement);         
+        result.addObject("metrics",Arrays.asList(Metric.values()));        
         return result;
     }
  
     @Transactional
     @PostMapping("/{id}/edit")
     public ModelAndView saveAchievement(@PathVariable int id,@Valid Achievement achievement, BindingResult br){
+        ModelAndView result=null;
         if(br.hasErrors()){
-            return new ModelAndView(ACHIEVEMENTS_FORM,br.getModel());            
+            result=new ModelAndView(ACHIEVEMENTS_FORM,br.getModel());            
+            result.addObject("metrics",Arrays.asList(Metric.values()));        
+            return result;
         }
         Achievement achievementToBeUpdated=service.getById(id);
         BeanUtils.copyProperties(achievement,achievementToBeUpdated,"id");
         service.save(achievementToBeUpdated);
-        ModelAndView result=showAchievements();
+        result=showAchievements();
         result.addObject("message", "The achievement was updated successfully");
         return result;        
     }
@@ -69,19 +78,23 @@ public class AchievementController {
     @GetMapping("/new")
     public ModelAndView createAchievement(){
         Achievement achievement=new Achievement();
-        ModelAndView result=new ModelAndView(ACHIEVEMENTS_FORM);
-        result.addObject("achievement", achievement);
+        ModelAndView result=new ModelAndView(ACHIEVEMENTS_FORM);        
+        result.addObject("achievement",achievement);
+        result.addObject("metrics",Arrays.asList(Metric.values()));        
         return result;
     }
 
     @Transactional
     @PostMapping("/new")
     public ModelAndView saveNewAchievement(@Valid Achievement achievement, BindingResult br){
+        ModelAndView result=null;
         if(br.hasErrors()){
-            return new ModelAndView(ACHIEVEMENTS_FORM,br.getModel());            
+            result=new ModelAndView(ACHIEVEMENTS_FORM,br.getModel());            
+            result.addObject("metrics",Arrays.asList(Metric.values()));        
+            return result;
         }
         service.save(achievement);
-        ModelAndView result=showAchievements();
+        result=showAchievements();
         result.addObject("message", "The achievement was created successfully");
         return result;
     }
