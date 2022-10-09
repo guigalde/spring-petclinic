@@ -67,3 +67,7 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04',
 INSERT INTO achievement(id,name,description,threshold,badge_image,metric) 
                 VALUES (1,'Viciado','Si juegas <THRESHOLD> partidas o mas, consideramos que ya estas enganchado.',10.0,'https://bit.ly/certifiedGamer','GAMES_PLAYED'),
                         (2,'Triunfador','Si ganas <THRESHOLD> o  mas partidas es que eres todo un triunfador.',20.0,'https://bit.ly/proGamer','VICTORIES');
+
+INSERT INTO owners_achievements(owner_id,achievements_id) VALUES(1,1);
+INSERT INTO owners_achievements(owner_id,achievements_id) VALUES(2,1);
+INSERT INTO owners_achievements(owner_id,achievements_id) VALUES(2,2);
