@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/statistics/achievements")
 public class AchievementController {
 
+    private final String PERSONAL_LISTING_VIEW="/achievements/PersonalAchievementsListing";
     private final String ACHIEVEMENTS_LISTING_VIEW="/achievements/AchievementsListing";
     private final String ACHIEVEMENTS_FORM="/achievements/createOrUpdateAchievementForm";
 
@@ -96,6 +97,13 @@ public class AchievementController {
         service.save(achievement);
         result=showAchievements();
         result.addObject("message", "The achievement was created successfully");
+        return result;
+    }
+
+    @GetMapping("/byOwner/{id}")
+    public ModelAndView showPersonalAchievementsListing(@PathVariable int id){
+        ModelAndView result=new ModelAndView(PERSONAL_LISTING_VIEW);
+        result.addObject("achievements",service.getAchievementsByOwner(id));
         return result;
     }
     

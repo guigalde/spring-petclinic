@@ -30,4 +30,8 @@ public class AchievementService {
     public void save(Achievement achievement){
         repo.save(achievement);
     }
+
+    public List<Achievement>  getAchievementsByOwner(int id) {
+        return repo.findPlayerAchievements(id);
+    }
 }
