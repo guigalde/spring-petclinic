@@ -14,4 +14,6 @@ public interface AchievementRepository extends CrudRepository<Achievement, Integ
 
     @Query("SELECT o.achievements FROM Owner o WHERE o.id=:ownerid")
     public List<Achievement> findPlayerAchievements(@Param("ownerid") int ownerid);
+
+    public Achievement findByName(String name);
 }

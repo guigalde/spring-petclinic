@@ -184,4 +184,12 @@ public class Owner extends Person {
 				.append("telephone", this.telephone).toString();
 	}
 
+	public Set<Achievement> getAchievements() {
+		return achievements;
+	}
+
+	public void setAchievements(Set<Achievement> achievements) {
+		this.achievements = achievements;
+	}
+
 }

@@ -9,6 +9,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.owner.Owner;
+import org.springframework.samples.petclinic.owner.OwnerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -25,12 +27,15 @@ public class AchievementController {
     private final String PERSONAL_LISTING_VIEW="/achievements/PersonalAchievementsListing";
     private final String ACHIEVEMENTS_LISTING_VIEW="/achievements/AchievementsListing";
     private final String ACHIEVEMENTS_FORM="/achievements/createOrUpdateAchievementForm";
+    private final String OWNER_ACHIEVEMENTS_FORM="/achievements/createOrUpdateAchievementsOfOwnerForm";
 
     private AchievementService service;
+    private OwnerService ownerService;
 
     @Autowired
-    public AchievementController(AchievementService service){
+    public AchievementController(AchievementService service, OwnerService ownerService){
         this.service=service;
+        this.ownerService=ownerService;
     }
 
     @Transactional(readOnly = true)
@@ -105,6 +110,24 @@ public class AchievementController {
         ModelAndView result=new ModelAndView(PERSONAL_LISTING_VIEW);
         result.addObject("achievements",service.getAchievementsByOwner(id));
         return result;
+    }
+
+    @GetMapping("/byOwner/{id}/edit")
+    public ModelAndView showOwnerAchievementsEditForm(@PathVariable("id")int ownerId){
+        ModelAndView result=new ModelAndView(OWNER_ACHIEVEMENTS_FORM);
+        Owner owner=ownerService.findOwnerById(ownerId);
+        result.addObject("owner", owner);
+        result.addObject("availableAchievements",service.getAchievements());
+        return result;
+    }
+
+    @PostMapping("/byOwner/{id}/edit")
+    public ModelAndView updateOwnerAchievements(Owner owner,BindingResult brresult,@PathVariable("id")int ownerId){        
+        Owner ownerToBeUpdated=ownerService.findOwnerById(ownerId);
+        ownerToBeUpdated.getAchievements().clear();
+        ownerToBeUpdated.getAchievements().addAll(owner.getAchievements());
+        ownerService.saveOwner(ownerToBeUpdated);
+        return showPersonalAchievementsListing(ownerId);
     }
     
 }

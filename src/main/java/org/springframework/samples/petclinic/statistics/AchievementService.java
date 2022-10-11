@@ -34,4 +34,8 @@ public class AchievementService {
     public List<Achievement>  getAchievementsByOwner(int id) {
         return repo.findPlayerAchievements(id);
     }
+
+    public Achievement getAchievementByName(String name){
+        return repo.findByName(name);
+    }
 }
