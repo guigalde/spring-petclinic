@@ -11,6 +11,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.samples.petclinic.owner.OwnerService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -128,6 +130,22 @@ public class AchievementController {
         ownerToBeUpdated.getAchievements().addAll(owner.getAchievements());
         ownerService.saveOwner(ownerToBeUpdated);
         return showPersonalAchievementsListing(ownerId);
+    }
+
+    @GetMapping("/me")
+    public ModelAndView showCurrentUserAchievements(@AuthenticationPrincipal Object user){
+        ModelAndView result=null;
+        Owner owner=null;
+        if(user!=null && (user instanceof UserDetails))
+            owner=ownerService.findOwnerByUsername(((UserDetails)user).getUsername());
+        if(owner!=null){
+            result=showPersonalAchievementsListing(owner.getId());
+        }else{
+            result=new ModelAndView("welcome");
+            result.addObject("message","You are not an Owner, thus you don't have achievements");
+            result.addObject("messageType","warning");            
+        }
+        return result;
     }
     
 }
